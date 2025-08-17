@@ -4,90 +4,104 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>QC — Margin & Clear Space (1080×1350)</title>
-  <link rel="stylesheet" href="assets/css/qc.css">
+
+  <!-- CSS di root -->
+  <link rel="stylesheet" href="./qc.css">
 </head>
 <body>
+  <!-- Header -->
   <header class="qc-header">
     <h1>QC — Margin & Clear Space (1080×1350)</h1>
-    <p>Upload desain → set header band & margin → cek clear space logo → export anotasi.</p>
+    <p>Upload desain → atur header band & margin → tandai logo → set clear space → cek KPI → download.</p>
   </header>
 
+  <!-- Layout -->
   <main class="qc-wrap">
-    <!-- Panel kiri -->
+    <!-- Panel kiri (kontrol) -->
     <aside class="qc-side">
-  <h2>File & Template</h2>
-  <div class="row">
-    <label class="min">Upload Desain</label>
-    <input type="file" id="upload" accept="image/*">
-  </div>
+      <h2>File & Template</h2>
+      <div class="row">
+        <label class="min">Upload Desain</label>
+        <input type="file" id="upload" accept="image/*">
+      </div>
 
-  <h2>Warna Frame</h2>
-  <div id="framePalette" class="palette palette--compact"></div>
-  <div class="row">
-    <small>Frame PNG dipakai: <code>../assets/img/frame-default.png</code> (ditint sesuai swatch).</small>
-  </div>
+      <h2>Warna Frame</h2>
+      <div id="framePalette" class="palette palette--compact"></div>
+      <div class="row">
+        <small>Frame PNG dipakai: <code>./frame-default.png</code> (satu file; ditint mengikuti swatch yang diklik).</small>
+      </div>
 
-  <h2>Header Band (area heading)</h2>
-  <div class="row">
-    <label class="min">Tinggi Header</label>
-    <input type="range" id="headerBand" min="120" max="260" step="2" value="180">
-    <span id="hVal" class="val">180</span>
-  </div>
+      <h2>Header Band (area heading)</h2>
+      <div class="row">
+        <label class="min">Tinggi Header</label>
+        <input type="range" id="headerBand" min="120" max="260" step="2" value="180">
+        <span id="hVal" class="val">180</span>
+      </div>
 
-  <h2>Margin (tepi kanvas)</h2>
-  <div class="row">
-    <label class="min">Padding</label>
-    <input type="range" id="margin" min="0" max="160" step="2" value="80">
-    <span id="mVal" class="val">80 px</span>
-  </div>
+      <h2>Margin (tepi kanvas)</h2>
+      <div class="row">
+        <label class="min">Padding</label>
+        <input type="range" id="margin" min="0" max="160" step="2" value="80">
+        <span id="mVal" class="val">80 px</span>
+      </div>
 
-  <h2>Guides</h2>
-  <div class="guides">
-    <div class="row toggles">
-      <label><input type="checkbox" id="gMargin" checked> Margin Box</label>
-      <label><input type="checkbox" id="gGrid"   checked> Grid 8 px</label>
-      <label><input type="checkbox" id="gSquare" checked> Safe 1080×1080</label>
-    </div>
-    <div class="row toggles">
-      <label><input type="checkbox" id="gHeader" checked> Header Band</label>
-      <label><input type="checkbox" id="gLogo"   checked> Logo Box</label>
-      <label><input type="checkbox" id="gClear"  checked> Clear Space Box</label>
-      <label><input type="checkbox" id="gHeat">  Heat (Clear Space)</label>
-    </div>
-    <div class="row"><button class="btn" id="toggleAll">Semua Guide: OFF</button></div>
-    <small>Pilih guide yang ingin ditampilkan. Tombol “Semua Guide” untuk cepat ON/OFF seluruhnya.</small>
-  </div>
+      <h2>Guides</h2>
+      <div class="guides">
+        <div class="row toggles">
+          <label><input type="checkbox" id="gMargin" checked> Margin Box</label>
+          <label><input type="checkbox" id="gGrid"   checked> Grid 8 px</label>
+          <label><input type="checkbox" id="gSquare" checked> Safe 1080×1080</label>
+        </div>
+        <div class="row toggles">
+          <label><input type="checkbox" id="gHeader" checked> Header Band</label>
+          <label><input type="checkbox" id="gLogo"   checked> Logo Box</label>
+          <label><input type="checkbox" id="gClear"  checked> Clear Space Box</label>
+          <label><input type="checkbox" id="gHeat">  Heat (Clear Space)</label>
+        </div>
+        <div class="row">
+          <button class="btn" id="toggleAll">Semua Guide: OFF</button>
+        </div>
+        <small>Pilih guide yang ingin ditampilkan. Tombol “Semua Guide” untuk ON/OFF seluruhnya.</small>
+      </div>
 
-  <h2>Logo & Clear Space</h2>
-  <div class="row"><button class="btn" id="draw">Tandai Kotak Logo (Redraw)</button></div>
-  <div class="row">
-    <label class="min">Clear Space</label>
-    <input type="range" id="clear" min="0.5" max="1.2" step="0.1" value="1.0">
-    <span id="cVal" class="val">1.0×</span>
-  </div>
+      <h2>Logo & Clear Space</h2>
+      <div class="row">
+        <button class="btn" id="draw">Tandai Kotak Logo (Redraw)</button>
+      </div>
+      <div class="row">
+        <label class="min">Clear Space</label>
+        <input type="range" id="clear" min="0.5" max="1.2" step="0.1" value="1.0">
+        <span id="cVal" class="val">1.0×</span>
+      </div>
 
-  <div class="kpi">
-    <div class="card" id="kpiA">Logo vs Margin: <b class="warn">—</b><div><small id="kpiAh">—</small></div></div>
-    <div class="card" id="kpiB">Clear Space: <b class="warn">—</b><div><small id="kpiBh">—</small></div></div>
-  </div>
+      <div class="kpi">
+        <div class="card" id="kpiA">
+          Logo vs Margin: <b class="warn">—</b>
+          <div><small id="kpiAh">—</small></div>
+        </div>
+        <div class="card" id="kpiB">
+          Clear Space: <b class="warn">—</b>
+          <div><small id="kpiBh">—</small></div>
+        </div>
+      </div>
 
-  <div class="row" style="margin-top:10px">
-    <button class="btn" id="save">Download PNG Beranotasi</button>
-    <button class="btn" id="saveClean">Download PNG Bersih</button>
-  </div>
+      <div class="row" style="margin-top:10px">
+        <button class="btn" id="save">Download PNG Beranotasi</button>
+        <button class="btn" id="saveClean">Download PNG Bersih</button>
+      </div>
 
-  <div class="legend">
-    <p><b>Alur:</b> Upload desain → atur <b>Header Band</b> & <b>Margin</b> → tandai <b>Logo</b> → set <b>Clear Space</b> → cek KPI → download.</p>
-  </div>
-</aside>
+      <div class="legend">
+        <p><b>Alur:</b> Upload desain → atur <b>Header Band</b> & <b>Margin</b> → tandai <b>Logo</b> → set <b>Clear Space</b> (0.5–1.2×) → cek KPI → download.</p>
+      </div>
+    </aside>
 
-
-    <!-- Panel kanan -->
+    <!-- Panel kanan (kanvas) -->
     <section class="qc-stage">
       <canvas id="cv" width="1080" height="1350"></canvas>
     </section>
   </main>
 
-  <script src="assets/js/qc.js"></script>
+  <!-- JS di root; pakai defer agar DOM siap -->
+  <script defer src="./qc.js"></script>
 </body>
 </html>
