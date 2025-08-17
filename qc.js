@@ -294,7 +294,8 @@ saveCleanBtn.addEventListener('click', ()=>{
 (async function boot(){
   // set nilai awal
   mVal.textContent = (margin.value||80)+' px';
-  frameImg = await loadImage('../assets/img/frame-default.png');
+  // ⬇️ PATH FRAME untuk setup file di ROOT
+  frameImg = await loadImage('./frame-default.png');
   renderFramePalette();
   redraw(); // tampilkan margin/grid/safe sejak awal
 })();
